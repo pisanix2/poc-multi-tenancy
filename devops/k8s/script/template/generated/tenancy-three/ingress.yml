@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sample-api
+  namespace: tenancy-three
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: tenancy-three.local.minikube
+    http:
+      paths:
+      - backend:
+          serviceName: sample-api
+          servicePort: 80

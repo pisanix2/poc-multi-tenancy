@@ -1,0 +1,13 @@
+# docker build -f dockerfile -t pisanix/sample-api:latest ../../
+# docker push pisanix/sample-api:latest
+
+FROM node:lts-alpine
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+CMD ["npm", "start"]

@@ -1,0 +1,19 @@
+# https://docs.traefik.io/v1.7/user-guide/kubernetes/
+# kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-rbac.yaml
+# kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-ds.yaml
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: frontend
+  namespace: tenancy-one
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: tenancy-one.local.minikube
+    http:
+      paths:
+      - backend:
+          serviceName: frontend
+          servicePort: 80

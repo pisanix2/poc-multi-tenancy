@@ -1,0 +1,37 @@
+# kubectl -n tenancy-one get deploy -o wide
+# kubectl -n tenancy-one create configmap api-configmap --from-env-file=../../.env_k8s
+# kubectl create configmap api-configmap --from-env-file=../../.env_k8s
+
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: sample-api
+  namespace: tenancy-one
+spec:
+  selector:
+    matchLabels:
+      app: sample-api
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: sample-api
+    spec:
+      containers:
+      - name: sample-api
+        image: pisanix/sample-api:latest
+        env:
+          -name: TENANCY
+            value: "tenancy-one"
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: api-configmap
+                key: PORT
+          - name: LAUNCHER_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: api-configmap
+                key: LAUNCHER_NAME
+        ports:
+        - containerPort: 80
