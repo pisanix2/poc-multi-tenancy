@@ -1,6 +1,7 @@
 # https://docs.traefik.io/v1.7/user-guide/kubernetes/
 # kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-rbac.yaml
 # kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-ds.yaml
+# http://192.168.99.104:8080/dashboard/
 
 apiVersion: extensions/v1beta1
 kind: Ingress
